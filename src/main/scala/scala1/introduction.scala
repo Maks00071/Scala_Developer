@@ -5,12 +5,16 @@ import scala.annotation.tailrec
 object scalaIntro1 extends App {
   //1. int
   val number: Int = 42
+  
   //2. double
   val pi: Double = 3.14
+  
   //3. boolean
   val isFlag: Boolean = true
+  
   //4. char
   val letter: Char = 'A'
+  
   //5. strings
   val str: String = "test"
 
