@@ -1,5 +1,5 @@
-package scala.scala2_2
-
+package scala2.scala2_3
+/*
 class Animal(val name: String, val age: Int) {
   def makeSound(): Unit = {
     println("generic sound")
@@ -26,3 +26,4 @@ object intro2 extends App{
 
 
 }
+*/
