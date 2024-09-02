@@ -1,5 +1,5 @@
 package scala.scala2_6
-
+/*
 object intro6 extends App{
 
   def greet(name: String)(implicit greeting: Int): Unit ={
@@ -51,3 +51,4 @@ object ImplicitObjectsExample extends App {
   printShow(42)
   printShow("42")
 }
+*/
