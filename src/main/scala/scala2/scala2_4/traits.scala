@@ -1,4 +1,6 @@
-package scala.scala2_4
+package scala2.scala2_4
+/*
+import scala.scala2_4.*
 
 trait Haslegs {
   def walk(): Unit = println("walking on legs")
@@ -45,3 +47,4 @@ object intro3 extends App{
   bird.fly()
   bird.test()
 }
+*/
