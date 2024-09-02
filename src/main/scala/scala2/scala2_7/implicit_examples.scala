@@ -1,4 +1,6 @@
-package scala.scala2_6
+package scala2.scala2_7
+
+
 /*
 object intro6 extends App{
 

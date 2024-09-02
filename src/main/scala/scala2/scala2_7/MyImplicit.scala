@@ -1,4 +1,4 @@
-package scala2
+package scala2.scala2_7
 
 object MyImplicit extends App{
 
