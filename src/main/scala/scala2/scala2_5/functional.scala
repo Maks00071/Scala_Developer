@@ -1,5 +1,5 @@
-package scala.scala2_4
-
+package scala2.scala2_5
+/*
 object intro4 extends App{
   // pure function
   val add = (x: Int, y: Int) => { x + y }
@@ -27,3 +27,4 @@ object intro4 extends App{
 
 
 }
+*/
