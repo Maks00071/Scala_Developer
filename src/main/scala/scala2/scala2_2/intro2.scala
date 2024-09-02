@@ -1,5 +1,5 @@
-package scala.scala2_1
-
+package scala2.scala2_2
+/*
 abstract class Animal(val name: String) {
   def makeSound(): Unit
 }
@@ -15,3 +15,4 @@ object intro2 extends App{
   dog.makeSound()
 
 }
+*/

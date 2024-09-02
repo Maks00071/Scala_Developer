@@ -1,4 +1,6 @@
-package scala2
+package scala2.scala2_1
+
+import scala2.*
 
 class MyIntroduction1 {
 }

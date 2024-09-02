@@ -1,5 +1,5 @@
-package scala.scala2
-
+package scala2.scala2_1
+/*
 class Person(val name: String, val age: Int) {
   def greet(): String = s"hi, i am $name and i am $age years old"
 }
@@ -52,4 +52,4 @@ object Main extends App {
   val dog = new Dog("test1")
   dog.makeSound()
 }
-
+*/
