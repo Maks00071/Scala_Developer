@@ -1,5 +1,5 @@
-package scala.scala2_5
-
+package scala2.scala2_6
+/*
 object intro5 extends App{
   // (parameters) => expression
 
@@ -12,3 +12,4 @@ object intro5 extends App{
   println(doubled)
 
 }
+*/
