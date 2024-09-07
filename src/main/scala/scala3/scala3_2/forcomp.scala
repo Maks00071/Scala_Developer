@@ -1,4 +1,4 @@
-package scala.scala3
+package scala3.scala3_2
 
 object forcomp {
   def main(args: Array[String]): Unit = {

@@ -1,5 +1,5 @@
-package scala.scala3
-
+package scala3.scala3_1
+/*
 import scala.collection.immutable
 
 object collections {
@@ -53,3 +53,4 @@ object collections {
 
   }
 }
+*/
