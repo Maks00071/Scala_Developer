@@ -41,6 +41,43 @@ object MyCollections {
     // свертка слева-направо
     println(s"foldLeft result: ${demoCollection3.foldLeft(0)((z,i) => z + i)}") // foldLeft result: 10
 
+    // выполним задачу: создадим список списков и выведем те списки, где сумма элементов больше 10
+    val testSum = List(1,2,3,4,5) :: List(1,50,3) :: List(1,2) :: Nil
+    testSum.filter(x => x.sum > 10).foreach(x => println(x.mkString(",")))
+    // "1,2,3,4,5"
+    // "1,50,3"
+
+    //реализуем flatMap
+
+    /**
+     * Function преобразует String to Integer
+     * @param str - String
+     * @return - Integer
+     */
+    def parseInt(str: String): Option[Int] = {
+      try {
+        Some(str.toInt)
+      } catch {
+        case _: NumberFormatException => None
+      }
+    }
+
+    /**
+     * Function делит число пополам
+     * @param num - Integer
+     * @return - num / 2
+     */
+    def divideByTwo(num: Int): Option[Int] = {
+      if (num % 2 == 0) Some(num / 2)
+      else None
+    }
+
+    val input: String = "8"
+    println(parseInt(input).flatMap(divideByTwo)) // Some(4)
+
+    val input1: String = "8sjdfh"
+    println(parseInt(input1).flatMap(divideByTwo)) // None
+
   }
 
 }
