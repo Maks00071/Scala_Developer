@@ -1,5 +1,5 @@
 package scala3.scala3_2
-
+/*
 object forcomp {
   def main(args: Array[String]): Unit = {
     val RGB = Seq("R", "G", "B")
@@ -74,3 +74,4 @@ object forcomp {
 
   }
 }
+*/
