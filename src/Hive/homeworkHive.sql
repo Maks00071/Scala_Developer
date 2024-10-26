@@ -122,7 +122,132 @@ tblproperties("skip.header.line.count"="1"); -- пропускаем загол�
 SELECT COUNT(*) FROM books_data.users_ext;
 
 --------------------------------
+--------------------------------
+-- create a partitioned table books
+-- настроим партицирование
+SET hive.exec.dynamic.partition=true;
+SET hive.exec.dynamic.partition.mode=nostrict;
 
+-- создадим таблицу <books>
+DROP TABLE IF EXISTS books_data.books;
+CREATE TABLE IF NOT EXISTS books_data.books(
+	isbn INT,
+	book_title STRING,
+	book_author STRING,
+	year_of_publication INT,
+	publisher STRING,
+	image_url_s STRING,
+	image_url_l STRING
+)
+STORED AS ORC;
+
+-- заполним таблицу <books>
+INSERT OVERWRITE TABLE books_data.books
+SELECT CAST(isbn AS INT)
+     , book_title
+     , book_author
+     , CAST(year_of_publication AS INT)
+     , publisher
+     , image_url_s
+     , image_url_l
+FROM books_data.books_ext;
+
+select count(*) from books_data.books;  -- 271 379 rows
+
+----------------------------
+-- создадим партицированную по полю "book_rating" таблицу <ratings_part>
+DROP TABLE IF EXISTS books_data.ratings_part;
+CREATE TABLE IF NOT EXISTS books_data.ratings_part(
+	  id_user INT
+	, isbn INT
+)
+PARTITIONED BY (book_rating INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|';
+
+-- заполним таблицу <ratings_part>
+INSERT INTO TABLE books_data.ratings_part PARTITION(book_rating)
+SELECT CAST(id_user AS INT) AS id_user
+	 , CAST(isbn AS INT) AS isbn
+	 , CAST(book_rating AS INT) AS book_rating
+FROM books_data.ratings_ext;  -- 11 partitions
+
+
+-----------------------------
+
+-- создадим таблицу <users>
+DROP TABLE IF EXISTS books_data.users;
+CREATE TABLE IF NOT EXISTS books_data.users(
+	  id_user INT
+	, country STRING
+	, region STRING
+	, city STRING
+	, age INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '|';
+
+-- заполним таблицу <users>
+INSERT INTO TABLE books_data.users
+SELECT CAST(id_user AS INT) AS id_user
+	 , split(location, ',')[2] AS country
+	 , split(location, ',')[1] AS region
+	 , split(location, ',')[0] AS city
+	 , CAST(age AS INT) AS age
+FROM books_data.users_ext;
+
+-----------------------------
+
+-- создаем витрины
+
+-- 1. витрина топ-20 стран по кол-ву пользователей
+SELECT country
+	 , COUNT(*) AS cnt
+FROM books_data.users
+WHERE country IS NOT NULL AND country <> ''
+GROUP BY country
+ORDER BY cnt DESC
+LIMIT 20;
+
+
+-- 2. витрина пользователей, которые оценили свыше 1000 книг
+SELECT u.id_user, COUNT(rp.isbn) AS cnt_isbn
+FROM books_data.users u
+INNER JOIN books_data.ratings_part rp
+ON u.id_user = rp.id_user
+GROUP BY u.id_user
+HAVING cnt_isbn > 1000
+ORDER BY cnt_isbn DESC;
+
+
+-- 3. витрина ранжирования кол-ва пользователей по странам
+SELECT DISTINCT trim(u.country)
+	 , COUNT(*) OVER(PARTITION BY trim(country)) AS cnt_users
+FROM books_data.users u
+WHERE u.country IS NOT NULL AND u.country <> ''
+ORDER BY cnt_users DESC;
+
+
+-- 4. топ-5 оцениваемых авторов + кол-во их книг с рейтингом = 10
+SELECT b.book_author
+	 , COUNT(*) AS rating_10
+FROM books_data.books b
+INNER JOIN books_data.ratings_part r
+ON b.isbn = r.isbn
+WHERE r.book_rating = 10 and b.book_author IS NOT NULL
+GROUP BY b.book_author
+ORDER BY rating_10 DESC
+LIMIT 5;
+
+
+-- 5. витрина топ-5 самых популярных издательств
+SELECT publisher
+	 , COUNT(isbn) AS cnt_isbn
+FROM books_data.books b
+WHERE isbn IS NOT NULL
+GROUP BY publisher
+ORDER BY cnt_isbn DESC
+LIMIT 5;
 
 
 
