@@ -86,7 +86,7 @@ CREATE EXTERNAL TABLE books_data.ratings_ext(
     , isbn STRING
     , book_rating STRING
 )
-COMMENT 'This is an external table of <books>'
+COMMENT 'This is an external table of <ratings>'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' -- сериализация
 WITH SERDEPROPERTIES(
     "quoteChar"="@",
@@ -102,7 +102,26 @@ SELECT COUNT(*) FROM books_data.ratings_ext;
 --------------------------
 
 -- create external table <users_ext>
+DROP TABLE IF EXISTS books_data.users_ext;
+CREATE EXTERNAL TABLE IF NOT EXISTS books_data.users_ext(
+      id_user STRING
+    , location STRING
+    , age STRING
+)
+COMMENT 'This is an external table of <users>'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' -- сериализация
+WITH SERDEPROPERTIES(
+    "quoteChar"="@",
+    "separatorChar"=";"
+)
+STORED AS TEXTFILE
+LOCATION '/user/hive/warehouse/book_users'
+tblproperties("skip.header.line.count"="1"); -- пропускаем заголовок CSV-file
 
+-- check of data exist
+SELECT COUNT(*) FROM books_data.users_ext;
+
+--------------------------------
 
 
 
