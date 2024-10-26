@@ -17,7 +17,7 @@ https://www.kaggle.com/datasets/saurabhbagchi/books-dataset?resource=download
 sed -i "s/\"/@/g" books.csv
 sed -i "s/\"/@/g" ratings.csv
 sed -i "s/\"/@/g" users.csv
-"
+
 -- упаковываем датасеты в docker - контейнер
 docker ps
 -- ~\ путь до папки с файлом (индивидуально)
