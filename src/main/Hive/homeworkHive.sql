@@ -80,6 +80,14 @@ SELECT COUNT(*) FROM books_data.books_ext;
 --------------------------
 
 -- create external table <ratings_ext>
+DROP TABLE IF EXISTS books_data.ratings_ext;
+CREATE EXTERNAL TABLE books_data.ratings_ext(
+      id_user STRING
+    , isbn STRING
+    , book_rating STRING
+)
+COMMENT 'This is an external table of <books>'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' -- сериализация
 
 
 
