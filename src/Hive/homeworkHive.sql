@@ -249,7 +249,10 @@ GROUP BY publisher
 ORDER BY cnt_isbn DESC
 LIMIT 5;
 
+---------------------
 
+docker-compose down
+docker system prune -a
 
 
 
