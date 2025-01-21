@@ -148,7 +148,7 @@ object TestScala extends App {
 object TailRecursion {
   def main(args: Array[String]): Unit = {
     val test = List("1", "2", "3")
-    println(s"size is ${tailRec(test, 0)}")   // => size is 3
+    println(s"size is ${tailRec(test, 0L)}")   // => size is 3
   }
 
   @tailrec
