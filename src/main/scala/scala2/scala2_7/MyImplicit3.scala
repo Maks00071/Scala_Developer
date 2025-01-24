@@ -51,11 +51,11 @@ object ImplicitObjectsExample3 {
     }
 
     implicit object IntShow3 extends Show3[Int] {
-      override def show(a: Int): String = s"Int ${a}"
+      override def show(a: Int): String = s"Int: ${a}"
     }
 
     implicit object StringShow3 extends Show3[String] {
-      override def show(str: String): String = s"String ${str}"
+      override def show(str: String): String = s"String: ${str}"
     }
 
     def printShow[A](a: A)(implicit s: Show3[A]): Unit = {
