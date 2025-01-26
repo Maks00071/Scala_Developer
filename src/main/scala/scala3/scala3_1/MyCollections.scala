@@ -26,7 +26,9 @@ object MyCollections {
     val test3 = new testCaseClass("3", 2)
     val test4 = new testCaseClass("4", 2)
 
-    val uniqRes = (test1 :: test2 :: test3 :: test4 :: Nil).groupBy(testClass => testClass.y).map(testClass => testClass._2.head)
+    val uniqRes = (test1 :: test2 :: test3 :: test4 :: Nil).
+      groupBy(testClass => testClass.y).
+      map(testClass => testClass._2.head)
     uniqRes.foreach(testClass => println(testClass))
     // testCaseClass(1, 1)
     // testCaseClass(2, 2)
