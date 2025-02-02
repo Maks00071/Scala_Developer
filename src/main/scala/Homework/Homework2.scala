@@ -28,7 +28,7 @@ import scala.io.StdIn as StdIn
 12. Используйте for comprehension, чтобы создать новый список, содержащий только четные числа из исходного списка.
  */
 
-object Homework {
+object Homework2 {
   def main(args: Array[String]): Unit = {
 
     // 1.Создайте переменные

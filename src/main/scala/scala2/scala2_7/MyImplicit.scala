@@ -1,5 +1,8 @@
 package scala2.scala2_7
 
+import scala.language.implicitConversions
+
+
 object MyImplicit extends App{
 
   def greet(name: String)(implicit greeting: String): Unit = {
