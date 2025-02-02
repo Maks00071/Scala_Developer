@@ -4,5 +4,6 @@
     <profile name="sbt 1" modules="Scala_Developer">
       <option name="compileOrder" value="JavaThenScala" />
     </profile>
+    <profile name="sbt 2" modules="lesoon10,lesson10_9259" />
   </component>
 </project>
